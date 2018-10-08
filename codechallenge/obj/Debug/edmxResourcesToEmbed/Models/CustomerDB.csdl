@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="VamsiDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="BirthDate" Type="DateTime" Precision="3" />
+    <Property Name="DateCreated" Type="DateTime" Precision="3" />
+    <Property Name="DateModified" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="isDeleted" Type="Boolean" />
+  </EntityType>
+  <EntityContainer Name="CustomerDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Customers" EntityType="Self.Customer" />
+  </EntityContainer>
+</Schema>

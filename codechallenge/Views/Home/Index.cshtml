@@ -1,0 +1,128 @@
+﻿@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@if (!Request.IsAuthenticated)
+{
+    <div class="well well-sm margin-top-larg"><h1>You must login to manage customer</h1></div>
+}
+else
+{
+    <div class="row margin-top-larg">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6"><h2 class="no-margin">Customers Managment</h2></div>
+                <div class="col-md-6 text-right">
+                    <a class="btn btn-warning btnRefreshData"><span class="glyphicon glyphicon-refresh"></span> Refresh</a>
+                    <a class="btn btn-primary btnAddCustomer"><span class="glyphicon glyphicon-plus-sign"></span> Add Customer</a>
+                </div>
+            </div>
+            <hr />
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>Customer Name</th>
+                        <th>Email</th>
+                        <th>Birth of Date</th>
+                        <th>Customer Code</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="tbCustomers"></tbody>
+            </table>
+        </div>
+    </div>
+}
+
+<div class="modal fade" id="mod-customer" tabindex="-1" role="dialog" aria-labelledby="Edit Customer form">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="mod-customer-title"></h4>
+            </div>
+            @using (Ajax.BeginForm("SaveCustomer", "Home", new AjaxOptions
+            {
+                HttpMethod = "POST",
+                OnSuccess = "successSave(data)",
+                OnFailure = "errorAjax()"
+            }))
+            {
+
+                @Html.AntiForgeryToken()
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <input type="hidden" id="hdnCustomerID" name="editCustomerID" value="" />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">First Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="txtFirstName" name="FirstName" class="form-control" required />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Last Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="txtLastName" name="LastName" class="form-control" required />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Email</label>
+                            <div class="col-sm-9">
+                                <input type="email" id="txtEmail" name="Email" class="form-control" required />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Birth Date</label>
+                            <div class="col-sm-9">
+                                <div class='input-group date DatePicker'>
+                                    <input type='text' id="txtBirthDate" name="BirthDate" class="form-control" required />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Close</button>
+                    <button type="submit" class="btn btn-sm btn-success btn-submit" id="btnSaveCustomer">
+                        <span class="glyphicon glyphicon-floppy-disk"></span> Save Changes
+                    </button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="delfultrackconfirm" role="dialog" aria-labelledby="delfultrackconfirmLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            @using (Ajax.BeginForm("DeleteCustomer", "Home", new AjaxOptions
+            {
+                HttpMethod = "POST",
+                OnSuccess = "successDelete(data)",
+                OnFailure = "errorAjax()"
+            }))
+            {
+
+                @Html.AntiForgeryToken()
+                <input type="hidden" id="hdnDelCustomerID" name="CustomerID" value="" />
+                <div id="delfultrackconfirmbody" class="modal-body">Are you sure want to delete this </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger" id="delfultrackconfirmdel">Delete</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    @Scripts.Render("~/general/js")
+    @Scripts.Render("~/index/js")
+
+}
