@@ -71,7 +71,7 @@ Unit Test Project
 
 7 Test cases were written to cover all the scenario's from controller to Model.
 
-![alt tag] (https://github.com/ManojLingala/Ansible-Playbook/blob/master/Images/TestCasesExecution.png)
+![alt tag](https://github.com/ManojLingala/Ansible-Playbook/blob/master/Images/TestCasesExecution.png)
 
 # Build a CI/CD (Continuous Integration/Continuous Deployment) 
 
@@ -93,7 +93,7 @@ Unit Test Project
 
 10- Click on the Edit build definition, then Test your CI and CD, and you can manage (Continuous Integration/Continuous Deployment) Pipeline
 
-![alt tag] (https://github.com/ManojLingala/Ansible-Playbook/blob/master/Images/CI.png)
+![alt tag](https://github.com/ManojLingala/Ansible-Playbook/blob/master/Images/CI.png)
 
 ![alt tag](https://github.com/ManojLingala/Ansible-Playbook/blob/master/Images/CICD.png)
 
